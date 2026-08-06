@@ -46,11 +46,11 @@ function App() {
     
        {/*<Switch>*/}
           {/*<Route exact path="/about">*/}
-            {/* <About /> */}
+             {/*<About mode={mode}/>*/} 
           {/*</Route>*/}
 
           {/*<Route exact path="/">*/}
-             <TextForm heading="Enter your text to analyze" mode={mode} showAlert={showAlert}/> 
+             <TextForm heading="Try TextUtils - Word Counter Character Counter CamelCase Converter " mode={mode} showAlert={showAlert}/> 
           {/*</Route>*/}
         {/*</Switch>*/}
        
