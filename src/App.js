@@ -1,14 +1,14 @@
 import './App.css';
 import Alert from './components/Alert';
-//import About from './components/About';
+import About from './components/About';
 import Navbar from './components/Navbar';
 import TextForm from './components/TextForm';
 import React, {useState} from 'react'
-/*{import {
-  BrowserRouter as Router,
+import {
+  HashRouter as Router,
   Switch,
   Route
-} from 'react-router-dom';}*/
+} from 'react-router-dom';
 
 
 function App() {
@@ -39,24 +39,24 @@ function App() {
   }
   return (
     <>
-      {/* <Router> */}
+       <Router> 
     <Navbar title="Textutils" mode={mode} toggleMode={toggleMode} aboutText="About"/>
     <Alert alert={alert}/>
     <div className="container my-3">
     
-       {/*<Switch>*/}
-          {/*<Route exact path="/about">*/}
-             {/*<About mode={mode}/>*/} 
-          {/*</Route>*/}
+       <Switch>
+          <Route exact path="/about">
+             <About mode={mode}/>
+          </Route>
 
-          {/*<Route exact path="/">*/}
+          <Route exact path="/">
              <TextForm heading="Try TextUtils - Word Counter Character Counter CamelCase Converter " mode={mode} showAlert={showAlert}/> 
-          {/*</Route>*/}
-        {/*</Switch>*/}
+          </Route>
+        </Switch>
        
    
     </div>
-     {/* </Router> */}
+      </Router> 
     </>
   );
 }
