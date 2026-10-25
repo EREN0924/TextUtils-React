@@ -3,61 +3,37 @@ import Alert from './components/Alert';
 import About from './components/About';
 import Navbar from './components/Navbar';
 import TextForm from './components/TextForm';
-import React, {useState} from 'react'
-import {
-  HashRouter as Router,
-  Switch,
-  Route
-} from 'react-router-dom';
-
+import React, { useState } from 'react';
+import { HashRouter as Router, Switch, Route } from 'react-router-dom';
 
 function App() {
-  const [mode, setMode] = useState('light')
-  const[alert,setAlert] = useState(null)
-  const showAlert = (message,type) =>{
-      setAlert({
-        msg: message,
-        type: type
-      })
-      setTimeout(() => {
-        setAlert(null);
-      }, 1500);
-    }
+  const [mode, setMode] = useState('light');
+  const [alert, setAlert] = useState(null);
+  const showAlert = (message, type) => {
+    setAlert({ msg: message, type });
+    setTimeout(() => setAlert(null), 1800);
+  };
   const toggleMode = () => {
-    if(mode === 'light'){
-      setMode('dark');
-      document.body.style.backgroundColor = '#042743';
-      showAlert("Dark mode has been Enabled","success")
-    }
-    else{
-      setMode('light')
-      document.body.style.backgroundColor = 'white';
-      showAlert("Light mode has been Enabled","success")
+    const nextMode = mode === 'light' ? 'dark' : 'light';
+    setMode(nextMode);
+    document.body.dataset.theme = nextMode;
+    showAlert(`${nextMode === 'dark' ? 'Dark' : 'Light'} mode enabled`, 'success');
+  };
 
-    }
-    
-  }
   return (
-    <>
-       <Router> 
-    <Navbar title="Textutils" mode={mode} toggleMode={toggleMode} aboutText="About"/>
-    <Alert alert={alert}/>
-    <div className="container my-3">
-    
-       <Switch>
-          <Route exact path="/about">
-             <About mode={mode}/>
-          </Route>
-
-          <Route exact path="/">
-             <TextForm heading="Try TextUtils - Word Counter Character Counter CamelCase Converter " mode={mode} showAlert={showAlert}/> 
-          </Route>
-        </Switch>
-       
-   
-    </div>
-      </Router> 
-    </>
+    <Router>
+      <div className={`textutils-app theme-${mode}`}>
+        <Navbar title="TextUtils" mode={mode} toggleMode={toggleMode} aboutText="About" />
+        <Alert alert={alert} />
+        <main className="app-main">
+          <Switch>
+            <Route exact path="/about"><About mode={mode} /></Route>
+            <Route exact path="/"><TextForm heading="TextUtils" mode={mode} showAlert={showAlert} /></Route>
+          </Switch>
+        </main>
+        <footer className="app-footer"><span>TextUtils</span><span>A little more clarity, one word at a time.</span></footer>
+      </div>
+    </Router>
   );
 }
 
